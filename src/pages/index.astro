@@ -1,6 +1,7 @@
 ---
 import { getImage } from '@astrojs/image'
 import Banner from '../components/Banner.astro'
+import { ExampleFetch } from '../components/ExampleFetch'
 import Section from '../components/Section.astro'
 import Layout from '../layouts/Layout.astro'
 
@@ -13,26 +14,23 @@ const homepageBannerPicture = await getImage({
   alt: 'homepage banner'
 }).then((img) => img.src)
 
+const response = await fetch('https://randomuser.me/api/')
+const data = await response.json()
+console.log(data)
 ---
 
-<Layout title='JUXT' navbar navbarNoBg>
+<Layout title='JUXT' navbar>
   <main>
-    <Banner
-      navbarNoBg
-      text='Scaling Simplicity'
-      style={{
-        backgroundImage: `url(${homepageBannerPicture})`
-      }}
-    />
     <Section className='bg-gray-800 py-28 text-white'>
-      <h2 class='pb-4 text-3xl md:text-4xl'>
-        Complexity limits your organization’s potential
-      </h2>
-      <p class='text-xl md:text-2xl font-extralight'>
-        We are a unique software engineering firm, with a track record of
-        rapidly delivering high-quality IT systems to meet challenging business
-        objectives.
-      </p>
+      <div class='flex gap-3'>
+        <div class='text-xl md:text-2xl font-extralight'>
+          Data pre-fetched at build time:
+        </div>
+        <div class='text-xl md:text-2xl font-extralight'>
+          {data.results[0].email}
+        </div>
+      </div>
+      <ExampleFetch client:only />
     </Section>
   </main>
 </Layout>

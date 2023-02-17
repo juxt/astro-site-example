@@ -94,7 +94,6 @@ export default function Navbar({ navLinks, navbarNoBg }) {
               active={page.active}
             />
           ))}
-          <DarkModeSwitch />
         </div>
 
         {/* mobile */}
@@ -119,7 +118,6 @@ export default function Navbar({ navLinks, navbarNoBg }) {
               active={page.active}
             />
           ))}
-          <DarkModeSwitch />
         </div>
       </div>
     </nav>
